@@ -1,0 +1,22 @@
+{
+  "name": "philips-hue",
+  "version": "1.0.0",
+  "description": "the philips hue application for the virtuoso awards",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": {
+    "name": "WARPAINT Media",
+    "email": "hello@warpaintmedia.ca",
+    "url": "http://warpaintmedia.ca"
+  },
+  "licenses": [{
+    "type": "MIT",
+    "url": "http://opensource.org/licenses/MIT"
+  }],
+  "dependencies": {
+    "node-hue-api": "^0.2.2",
+    "twit": "^1.1.13"
+  }
+}
