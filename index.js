@@ -11,7 +11,7 @@ var T = new Twit({
 
 // filter the public stream by english tweets containing `#toronto, #ldnont, #BostonStrong`
 var stream = T.stream('statuses/filter', {
-  track: '#ldnont',
+  track: '#news',
   language: 'en'
 });
 
@@ -24,8 +24,8 @@ var flash = lightState.create().white(154, 100).transition(0);
 // dim when flash is over
 var dim = lightState.create().white(154, 10).transition(0);
 
-var events = require('events');
-var emitter = new events.EventEmitter();
+var Emitter = require('events').EventEmitter,
+    emitter = new Emitter();
 
 var colors = [
   {
@@ -61,11 +61,12 @@ emitter.on('starting', function (i) {
   console.log('starting', names[i]);
 });
 
-var currentLight = 2; // my one light that is setup
+var currentLight = 3; // my one light that is setup
 
 function loop(api) {
   var counter = 0;
-  var transition = 3;
+  // number of seconds to wait
+  var transition = 1;
   var looper = setInterval(function () {
     emitter.emit('starting', counter);
     var state = lightState.create().rgb(
@@ -79,9 +80,10 @@ function loop(api) {
       counter = 0;
     }
   }, transition * 1250);
-  emitter.on('tweet', function () {
+  emitter.on('tweet', function handleTweet() {
     clearInterval(looper);
-    emitter.removeListener('tweet');
+    // use a noop function to avoid errors
+    emitter.removeListener('tweet', function(){});
   });
 }
 
