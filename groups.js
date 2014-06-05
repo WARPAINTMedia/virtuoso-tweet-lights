@@ -74,7 +74,7 @@ function loop(api) {
       colors[counter].r,
       colors[counter].g,
       colors[counter].b
-    ).brightness(50).transition(transition);
+    ).brightness(100).transition(transition);
     api.setGroupLightState(0, state);
     counter += 1;
     if (counter === colors.length) {
