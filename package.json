@@ -16,7 +16,7 @@
     "url": "http://opensource.org/licenses/MIT"
   }],
   "dependencies": {
-    "node-hue-api": "^0.2.2",
-    "twit": "^1.1.13"
+    "node-hue-api": "~0.2.2",
+    "twit": "~1.1.15"
   }
 }
