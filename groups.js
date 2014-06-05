@@ -11,7 +11,7 @@ var T = new Twit({
 
 // filter the public stream by english tweets containing `#toronto, #ldnont, #BostonStrong`
 var stream = T.stream('statuses/filter', {
-  track: '#ldnont',
+  track: ['#virtuoso14', '#virtuoso2014', '#iabc', '#iabclondon', '#iabcldnont', '#virtuoso', '#virtuosoawards', '@iabclondon', '@EdgarAndJoes'], // '#virtuoso14', '#iabc', '#iabclondon', '#iabcldnont', '#virtuoso', '#virtuosoawards', '@iabclondon', '@EdgarAndJoes'
   language: 'en'
 });
 
@@ -26,6 +26,7 @@ var dim = lightState.create().white(154, 10).transition(0);
 
 var Emitter = require('events').EventEmitter,
     emitter = new Emitter();
+    emitter.setMaxListeners(2);
 
 var colors = [
   {
