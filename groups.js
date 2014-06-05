@@ -80,7 +80,7 @@ function loop(api) {
     if (counter === colors.length) {
       counter = 0;
     }
-  }, transition * 2250);
+  }, transition * 5250);
   emitter.on('tweet', function handleTweet() {
     clearInterval(looper);
     // use a noop function to avoid errors
