@@ -74,12 +74,12 @@ function loop(api) {
       colors[counter].g,
       colors[counter].b
     ).brightness(50).transition(transition);
-    api.setLightState(currentLight, state);
+    api.setGroupLightState(0, state);
     counter += 1;
     if (counter === colors.length) {
       counter = 0;
     }
-  }, transition * 1250);
+  }, transition * 2250);
   emitter.on('tweet', function handleTweet() {
     clearInterval(looper);
     // use a noop function to avoid errors
@@ -100,6 +100,6 @@ hue.locateBridges(function (err, result) {
   stream.on('tweet', function (tweet) {
     console.log("> %s \r", tweet.text);
     emitter.emit('tweet');
-    api.setLightState(currentLight, flash).then(loop.bind(this, api));
+    api.setGroupLightState(0, flash).then(loop.bind(this, api));
   });
 });
