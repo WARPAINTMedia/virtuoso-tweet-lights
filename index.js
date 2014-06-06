@@ -11,7 +11,7 @@ var T = new Twit({
 
 // filter the public stream by english tweets containing `#toronto, #ldnont, #BostonStrong`
 var stream = T.stream('statuses/filter', {
-  track: '#ldnont',
+  track: ['#virtuoso14', '#virtuoso2014', '#iabc', '#iabclondon', '#iabcldnont', '#virtuoso', '#virtuosoawards', '@iabclondon', '@EdgarAndJoes'], // '#virtuoso14', '#iabc', '#iabclondon', '#iabcldnont', '#virtuoso', '#virtuosoawards', '@iabclondon', '@EdgarAndJoes'
   language: 'en'
 });
 
@@ -26,6 +26,7 @@ var dim = lightState.create().white(154, 10).transition(0);
 
 var Emitter = require('events').EventEmitter,
     emitter = new Emitter();
+    emitter.setMaxListeners(2);
 
 var colors = [
   {
@@ -73,13 +74,13 @@ function loop(api) {
       colors[counter].r,
       colors[counter].g,
       colors[counter].b
-    ).brightness(50).transition(transition);
-    api.setLightState(currentLight, state);
+    ).brightness(100).transition(transition);
+    api.setGroupLightState(0, state);
     counter += 1;
     if (counter === colors.length) {
       counter = 0;
     }
-  }, transition * 1250);
+  }, transition * 5250);
   emitter.on('tweet', function handleTweet() {
     clearInterval(looper);
     // use a noop function to avoid errors
@@ -100,6 +101,6 @@ hue.locateBridges(function (err, result) {
   stream.on('tweet', function (tweet) {
     console.log("> %s \r", tweet.text);
     emitter.emit('tweet');
-    api.setLightState(currentLight, flash).then(loop.bind(this, api));
+    api.setGroupLightState(0, flash).then(loop.bind(this, api));
   });
 });
